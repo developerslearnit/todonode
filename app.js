@@ -2,28 +2,35 @@ const express = require('express');
 
 
 //Create the express app
-const app =express();
+const app = express();
+
+app.use(express.json());
 
 //create a router for our todos
 const todos = [
     {
         id: 1,
-        title: 'Learn Node',
+        title: 'Node js',
         completed: false
     },
     {
         id: 2,
-        title: 'Learn Express',
+        title: 'Express',
         completed: true
     },
     {
         id: 3,
-        title: 'Learn MongoDB',
+        title: ' MongoDB',
         completed: false
     },
     {
         id: 4,
-        title: 'Learn React',
+        title: 'React Native',
+        completed: true
+    },
+    {
+        id: 5,
+        title: 'Ruby',
         completed: true
     }
 ];
@@ -59,10 +66,33 @@ app.get(
 );
 
 
-app.get(
-    '/api/v1/ids/',(req,res) => {
-        const targetTodo = todos.map((todo) => todo.id) || [];
-        res.status(200).json(targetTodo)
+app.post(
+    '/api/v1/todos',(req,res) => {
+        const {title} = req.body;
+        const addTodo = 
+            {
+                id: todos.length +1,
+                title,
+                completed: false
+            }
+         todos.push(addTodo);
+            res.status(200).json(todos)
+
+    }
+);
+
+app.post(
+    '/api/v1/todos',(req,res) => {
+        const {title} = req.body;
+        const addTodo = 
+            {
+                id: todos.length -1,
+                title,
+                completed: false
+            }
+         todos.unshift(addTodo);
+            res.status(200).json(todos)
+
     }
 );
 
