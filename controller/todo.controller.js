@@ -8,13 +8,24 @@ const getTodos = async (req, res) => {
   res.status(200).json(todo);
 };
 
-const getTodoById = async(req,res) =>{
+const getTodoByOwnerId = async(req,res) =>{
+  const id = req.params.id
+
+  if(!id){
+    return res.status(400).json('Try again')
+  }
+
+  
   const todo = await db.todo.findUnique({
       where: {
-        id: req.params.id
+        ownerId: id
       }
-   
   });
+
+  if (!todo){
+    return res.status(404).json({message:'User does not exist'})
+  }
+  
   res.status(200).json(todo)
 }
 
@@ -58,7 +69,7 @@ if(!todoExist){
 
  const todo = await db.todo.delete({
   where: {
-    id: req.params.id
+    id: id
   }
  });
  res.status(200).json({message:"Todos deleted successfully"})
@@ -101,4 +112,4 @@ if(!todoExist){
  res.status(200).json({message:'Updated Successfully'})
   };
 
-module.exports = { getTodos, addTodo, getTodoById, deleteTodo, updateTodo};
+module.exports = { getTodos, addTodo, getTodoByOwnerId, deleteTodo, updateTodo};
