@@ -6,9 +6,7 @@
   "scripts": {
     "startDev": "nodemon app.js"
   },
-  "engines": {
-    "node": ">=18.8.0 <19.0.0"
-  },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
