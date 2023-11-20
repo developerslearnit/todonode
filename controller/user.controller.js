@@ -32,6 +32,25 @@ const newUser = await db.user.create({
   res.status(200).json(newUser);
 };
 
+const loginUser = async(req, res)=>{
+  const {email, password} = req.body;
+
+  const existingUser = await db.user.findFirst({
+    data: {
+      email: email,
+      password: password
+    }
+
+  })
+  if (!existingUser){
+    return res.status(404).json({message:'User does not exist'})
+
+  }
+  res.status(200).json(existingUser)
+
+}
 
 
-module.exports = { getUser, addUser, getUserById };
+
+
+module.exports = { getUser, addUser, getUserById, loginUser};
