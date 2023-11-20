@@ -10,13 +10,13 @@ const getTodos = async (req, res) => {
 
 const getTodoByOwnerId = async(req,res) =>{
   const id = req.params.id
-
+  console.log('key',id)
   if(!id){
     return res.status(400).json('Try again')
   }
 
   
-  const todo = await db.todo.findUnique({
+  const todo = await db.todo.findMany({
       where: {
         ownerId: id
       }
