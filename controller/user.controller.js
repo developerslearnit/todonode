@@ -46,7 +46,7 @@ const loginUser = async(req, res)=>{
     return res.status(404).json({message:'User does not exist'})
 
   }
-  res.status(200).json(existingUser)
+  res.status(200).json(existingUser,{message:'Login was successful'})
 
 }
 
