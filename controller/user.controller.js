@@ -18,7 +18,7 @@ const getUserById = async(req,res) =>{
 }
 
 const addUser = async (req, res) => {
-const {,firstName ,lastName, email, password } = req.body;
+const {userName,firstName ,lastName, email, password } = req.body;
  
 const newUser = await db.user.create({
     data: {
