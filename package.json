@@ -6,12 +6,11 @@
   "scripts": {
     "startDev": "nodemon app.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.5.2",
+    "@prisma/client": "^5.6.0",
     "body": "^5.1.0",
     "express": "^4.18.2",
     "parser": "^0.1.4",
@@ -19,6 +18,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1",
-    "prisma": "^5.5.2"
+    "prisma": "^5.6.0"
   }
 }

@@ -5,7 +5,7 @@
 
 */
 -- DropIndex
-DROP INDEX "User_userId_key";
+-- DROP INDEX "User_userId_key";
 
 -- AlterTable
 ALTER TABLE "User" DROP COLUMN "userId";

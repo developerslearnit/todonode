@@ -6,7 +6,6 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "userId" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "firstName" TEXT,
     "lastName" TEXT,
@@ -43,7 +42,6 @@ CREATE TABLE "Todo" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_userId_key" ON "User"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
