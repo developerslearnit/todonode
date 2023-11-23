@@ -22,7 +22,6 @@ const {userId ,email , firstName ,lastName, password } = req.body;
  
 const newUser = await db.user.create({
     data: {
-      userId: userId,
       email: email,
       firstName: firstName,
       lastName: lastName,
