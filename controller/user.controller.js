@@ -18,18 +18,25 @@ const getUserById = async(req,res) =>{
 }
 
 const addUser = async (req, res) => {
-const {userName,firstName ,lastName, email, password } = req.body;
+  try {
+    const {userName,firstName ,lastName, email, password } = req.body;
  
-const newUser = await db.user.create({
-    data: {
-      userName:userName,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-    },
-  });
-  res.status(200).json(newUser);
+    const newUser = await db.user.create({
+        data: {
+          userName:userName,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        },
+      });
+      res.status(200).json(newUser);
+  } catch (error) {
+    res.status(500).json({
+      error:error.message
+    })
+  }
+
 };
 
 const loginUser = async(req, res)=>{
