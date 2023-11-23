@@ -8,7 +8,7 @@ const getUser = async (req, res) => {
 
 
 const getUserById = async(req,res) =>{
-  const todo = await db.user.findUnique({
+  const user = await db.user.findUnique({
       where: {
         id: req.params.id
       }
