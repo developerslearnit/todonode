@@ -35,12 +35,12 @@ const loginUser = async(req, res)=>{
   const {email, password} = req.body;
 
   const existingUser = await db.user.findFirst({
-    data: {
-      email: email,
-      password: password
-    }
-
-  })
+    where: {
+      email:email,
+      password:password
+  }
+}
+  )
   if (!existingUser){
     return res.status(404).json({message:'User does not exist'})
 
