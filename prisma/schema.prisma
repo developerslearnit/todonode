@@ -15,7 +15,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // userId    String  
+  // userId    String  @unique
   email     String  @unique
   firstName String?
   lastName  String?
