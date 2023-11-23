@@ -18,13 +18,14 @@ const getUserById = async(req,res) =>{
 }
 
 const addUser = async (req, res) => {
-const {email , firstName ,lastName, password } = req.body;
+const {userName,firstName ,lastName, email, password } = req.body;
  
 const newUser = await db.user.create({
     data: {
-      email: email,
+      userName:userName,
       firstName: firstName,
       lastName: lastName,
+      email: email,
       password: password,
     },
   });
