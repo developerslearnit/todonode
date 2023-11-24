@@ -13,10 +13,10 @@ app.use(todoRoute);
 app.use(categoryRoute);
 app.use(userRoute);
 
+const port = process.env.PORT || 3000;
 
-const port = 2006;
 
 //spin up our server to listen in our port
-app.listen(port,() =>{
+app.listen(port, "0.0.0.0", () =>{
     console.log(`Server is running on port ${port}`)
 });
