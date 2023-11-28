@@ -1,5 +1,11 @@
 const { PrismaClient } = require("@prisma/client");
 var db = new PrismaClient();
+const bcrypt = require("bcrypt");
+const { user } = require("../routes/user.route");
+const saltRounds = 10;
+
+
+
 
 const getUser = async (req, res) => {
   const user = await db.user.findMany({});
@@ -19,15 +25,32 @@ const addUser = async (req, res) => {
   try {
     const { userName, firstName, lastName, email, password } = req.body;
 
+
+    const existingUser = await db.user.findUnique({
+      where:{
+        userName:userName
+      }
+    });
+
+    if(existingUser){
+      return res.status(400).json("A user with the same username already exists");
+    }
+
+    var encryptedPassword = "";
+
+    const hashedPassword =  await bcrypt.hashSync(password,saltRounds);
+
+    console.log(hashedPassword);
     const newUser = await db.user.create({
       data: {
         userName: userName,
         firstName: firstName,
         lastName: lastName,
         email: email,
-        password: password,
+        password:hashedPassword,
       },
     });
+
     res.status(200).json(newUser);
   } catch (error) {
     res.status(500).json({
@@ -39,16 +62,22 @@ const addUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  const existingUser = await db.user.findFirst({
-    where: {
-      email: email,
-      password: password,
-    },
+
+  const user = await db.user.findFirst({
+where: {
+  email:email,
+}
   });
-  if (!existingUser) {
-    return res.status(404).json({ message: "User does not exist" });
+  if (!user) {
+    return res.status(200).json({ message: "Wrong username or password" });
   }
-  res.status(200).json(existingUser);
+
+  const passwordMatched = await bcrypt.compareSync(password,user.password);
+   if (!passwordMatched) {
+    return res.status(200).json({ message: "Wrong username or password" });
+  }
+
+  res.status(200).json({data:{userId:user.id,email:user.email}});
 };
 
 module.exports = { getUser, addUser, getUserById, loginUser };
