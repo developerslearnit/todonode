@@ -3,7 +3,7 @@ const userCtrl = require('../controller/user.controller');
 
 const router = express.Router();
 
-router.get('/api/v1/users',userCtrl.getUser);
+router.get('/api/v1/user',userCtrl.getUser);
 router.post('/api/v1/user/auth/login',userCtrl.loginUser);
 router.post('/api/v1/user',userCtrl.addUser);
 router.get('/api/v1/user/:id',userCtrl.getUserById);
